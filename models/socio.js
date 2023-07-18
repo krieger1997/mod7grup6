@@ -1,7 +1,8 @@
 import db from "../db/connection.js";
 import { DataTypes } from "sequelize";
+import HistorialPrestamo from "./historialPrestamos.js";
 
-const Socio =db.define('Socio',{
+const Socio =db.define('socio',{
     id:{
         type:DataTypes.INTEGER,
         primaryKey:true,
@@ -36,6 +37,7 @@ const Socio =db.define('Socio',{
     }
 })
 
-
+Socio.hasMany(HistorialPrestamo);
+HistorialPrestamo.belongsTo(Socio);
 
 export default Socio;

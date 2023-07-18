@@ -1,5 +1,8 @@
 import db from "../db/connection.js";
 import { DataTypes } from "sequelize";
+import AutorLibro from "./autorLibro.js";
+import Autor from "./autor.js";
+import HistorialPrestamo from "./historialPrestamos.js";
 
 const Libro = db.define('libro',{
     id:{
@@ -23,34 +26,21 @@ const Libro = db.define('libro',{
         type:DataTypes.INTEGER,
         allowNull:false
     },
-    codAutor:{
-        type:DataTypes.INTEGER,
-        allowNull:false
-    },
-    nombreAutor:{
-        type:DataTypes.STRING,
-        allowNull:false
-    },
-    apellidoAutor:{
-        type:DataTypes.STRING,
-        allowNull:false
-    },
-    nacimientoMuerte:{
-        type:DataTypes.STRING,
-        allowNull:false
-    },
-    tipoAutor:{ 
-        type:DataTypes.STRING,
-        allowNull:false,
-        validate: {
-            isIn: [['PRINCIPAL', 'COAUTOR']] // Lista de valores permitidos: 'PRINCIPAL' y 'COAUTOR'
-        }
-    },
     diasPrestamo:{
         type:DataTypes.INTEGER,
         allowNull:false,
     }
 });
+
+Libro.belongsToMany(Autor,{
+    through:AutorLibro
+})
+Autor.belongsToMany(Libro,{
+    through:AutorLibro
+});
+
+Libro.hasMany(HistorialPrestamo);
+HistorialPrestamo.belongsTo(Libro);
 
 
 
