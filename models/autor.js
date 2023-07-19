@@ -14,9 +14,13 @@ const Autor = db.define('autor',{
         type:DataTypes.STRING,
         allowNull:false
     },
-    nacimientoMuerte:{
-        type:DataTypes.STRING,
+    nacimiento:{
+        type:DataTypes.INTEGER,
         allowNull:false
+    },
+    muerte:{
+        type:DataTypes.INTEGER,
+        allowNull:true
     }
 });
 

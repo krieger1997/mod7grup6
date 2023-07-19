@@ -4,15 +4,15 @@ import { DataTypes } from "sequelize";
 const HistorialPrestamo = db.define('historialPrestamo',{
 
     fechaInicio:{
-        type:DataTypes.DATE,
+        type:DataTypes.DATEONLY,
         allowNull:false
     },
     fechaFin:{
-        type:DataTypes.DATE,
+        type:DataTypes.DATEONLY,
         allowNull:false
     },
     fechaRealDevolucion:{
-        type:DataTypes.DATE,
+        type:DataTypes.DATEONLY,
         allowNull:true
     }
 
@@ -21,7 +21,7 @@ const HistorialPrestamo = db.define('historialPrestamo',{
         beforeValidate: async (historialPrestamo,options)=>{
             const prestado = await HistorialPrestamo.findOne({
                 where:{
-                    LibroId:historialPrestamo.LibroId,
+                    libroId:historialPrestamo.libroId,
                     fechaRealDevolucion:null
                 }
             });
@@ -31,7 +31,7 @@ const HistorialPrestamo = db.define('historialPrestamo',{
 
             const socioPendiente = await HistorialPrestamo.findOne({
                 where: {
-                    SocioId: historialPrestamo.SocioId,
+                    socioId: historialPrestamo.socioId,
                     fechaRealDevolucion:null
                 }
             })

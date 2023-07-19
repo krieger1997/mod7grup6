@@ -32,7 +32,7 @@ const Socio =db.define('socio',{
         type: DataTypes.INTEGER,
         allowNull: false,
         validate: {
-            is: /^\d{8}$/ // Expresión regular para validar que sean exactamente 8 números
+            is: /^\d{9}$/ // Expresión regular para validar que sean exactamente 8 números
         }
     }
 })
